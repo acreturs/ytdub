@@ -87,6 +87,7 @@ def get_large_audio_transcription():
 translator = Translator()
 
 
+
 def translate(text)->str:
     translation = translator.translate(text,dest="en",src="de")
     print(f"{translation.origin} ({translation.src}) --> {translation.text} ({translation.dest})")
