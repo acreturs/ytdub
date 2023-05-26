@@ -48,32 +48,7 @@ def get_large_audio_transcription():
             # try converting it to text
             try:
                 text = r.recognize_google(audio_listened)
-                translated = translate(text)
-                print("mit diesem übersetzten text wird aufgerufen",translated)
-                headers = {"xi-api-key": "7ede5162d024a392e4e50120d188ee33"}
-
-                url = "https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM"
-
-                data = {
-
-                    "text": translated,
-                    "voice_settings": {
-                        "stability": 0,
-                        "similarity_boost": 0
-                    }
-                }
-
-                print("response gesendet")
-                response = requests.post(url, headers=headers, json=data)
-
-                # Open file in binary write mode
-                binary_file = open("my_file"+str(i)+".wav", "wb")
-
-                # Write bytes to file
-                binary_file.write(response.content)
-
-                # Close file
-                binary_file.close()
+                print(text)
             except sr.UnknownValueError as e:
                 print("Error:", str(e))
             else:
@@ -87,11 +62,10 @@ def get_large_audio_transcription():
 translator = Translator()
 
 
-
-def translate(text)->str:
-    translation = translator.translate(text,dest="en",src="de")
-    print(f"{translation.origin} ({translation.src}) --> {translation.text} ({translation.dest})")
-    return translation.text
+#def translate(text)->str:
+ #   translation = translator.translate(text,dest="en",src="de")
+  #  print(f"{translation.origin} ({translation.src}) --> {translation.text} ({translation.dest})")
+   # return translation.text
 
 if __name__ == '__main__':
     get_large_audio_transcription()
